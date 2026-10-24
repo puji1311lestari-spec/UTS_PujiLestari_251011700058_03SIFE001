@@ -3,14 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\Models\Artwork;
+use Illuminate\Http\Request;
 
 class ArtworkController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $artworks = Artwork::all();
+        $search = $request->input('search');
 
-        return view('artworks.index', compact('artworks'));
+        $artworks = Artwork::when($search, function ($query, $search) {
+            $query->where('title', 'like', '%' . $search . '%')
+                  ->orWhere('artist', 'like', '%' . $search . '%');
+        })->get();
+
+        return view('artworks.index', compact('artworks', 'search'));
     }
 
     public function show($id)
