@@ -17,7 +17,6 @@
                     <p><strong>Medium:</strong> {{ $artwork->medium }}</p>
                     <p><strong>Harga:</strong> <span class="text-success fs-4">Rp {{ number_format($artwork->price, 0, ',', '.') }}</span></p>
                     
-                    <!-- Tombol Kembali menggunakan helper url() agar tidak error -->
                     <a href="{{ url('/artworks') }}" class="btn btn-secondary mt-3">Kembali ke Katalog</a>
                 </div>
             </div>
